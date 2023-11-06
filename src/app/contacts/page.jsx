@@ -1,5 +1,6 @@
 import cl from './page.module.css'
 import Image from 'next/image';
+import Button from '@/components/Button/Button'
 
 const Contacts = () => {
   return (
@@ -15,7 +16,24 @@ const Contacts = () => {
           />
         </div>
         <form className={cl.form}> 
-
+          <input
+            type='text'
+            placeholder='name'
+            className={cl.input}
+          />
+          <input
+            type='text'
+            placeholder='email'
+            className={cl.input}
+          />
+          <textarea 
+          className={cl.textArea}
+          name='' 
+          id='' 
+          cols='30' 
+          rows='10'
+          ></textarea>
+          <Button url='#' text='Send'/>
         </form>
       </div>
     </div>
