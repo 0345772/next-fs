@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import cl from './Navbar.module.css'
+import DarkModeToggle from "../DarkModeToggle/DarkModeToggle";
 
 const links = [
   {
@@ -37,10 +38,12 @@ const links = [
 ];
 
 const Navbar = () => {
+
   return (
-    <nav className={cl.navbar}>
+    <nav className={cl.navbar} >
       <Link href={"/"} className={cl.logo}>Step_65</Link>
       <div className={cl.links} >
+        <DarkModeToggle/>
         {links.map((el) => (
           <Link key={el.id} href={el.url}>
             {el.title}
