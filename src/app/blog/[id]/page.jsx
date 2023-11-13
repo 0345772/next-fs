@@ -1,38 +1,51 @@
 import cl from './page.module.css'
 import Image from 'next/image';
 
-const BlogId = ({params}) => {
+async function getData(id) {
+  const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data !!!!!!!!!!!!");
+  }
+
+  return res.json();
+}
+
+export async function generateMetadata({params}) {
+  const post = await getData(params.id)
+  return {
+    title: post.title,
+    description: post.desc
+  }
+}
+
+const BlogId = async ({ params }) => {
+  const data = await getData(params.id);
   return (
     <div className={cl.container}>
       <div className={cl.top}>
         <div className={cl.info}>
-          <h3 className={cl.title}>Title</h3>
-          <p className={cl.desc}>description</p>
+          <h1 className={cl.title}>{data.title}</h1>
+          <p className={cl.desc}>{data.desc}</p>
           <div className={cl.author}>
             <Image
-              src='https://cdn.pixabay.com/photo/2023/11/03/10/48/indian-8362684_1280.jpg'
-              alt='leopard'
+              src={data.img}
+              alt=""
               width={40}
               height={40}
               className={cl.avatar}
             />
-            <span className={cl.username}>username</span>
+            <span className={cl.username}>{data.username}</span>
           </div>
         </div>
         <div className={cl.imageContainer}>
-          <Image
-            src='https://cdn.pixabay.com/photo/2023/11/03/19/55/ai-generated-8363769_1280.jpg'
-            alt='leopard'
-            // width={40}
-            // height={40}
-            fill={true}
-            className={cl.avatar}
-          />
+          <Image src={data.img} alt="" fill={true} className={cl.image} />
         </div>
       </div>
       <div className={cl.content}>
-      <p className={cl.text}>description</p>
-        <div></div>
+        <p className={cl.text}>{data.content}</p>
       </div>
     </div>
   );

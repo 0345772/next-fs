@@ -21,3 +21,9 @@
     font-size: 18px;
     color: #999;
   }
+  .imageContainer {
+    background: none;
+  }
+  .mainContainer{
+    background: none;
+  }

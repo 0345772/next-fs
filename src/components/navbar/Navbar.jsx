@@ -3,6 +3,8 @@
 import Link from "next/link";
 import cl from './Navbar.module.css'
 import DarkModeToggle from "../DarkModeToggle/DarkModeToggle";
+import { useContext } from "react";
+import { ThemeContext } from "@/context/ThemeContext";
 
 const links = [
   {
@@ -35,13 +37,13 @@ const links = [
     title: "Dashboard",
     url: "/dashboard",
   },
-];
+]
 
 const Navbar = () => {
-
+const logo = 'Step_65'
   return (
     <nav className={cl.navbar} >
-      <Link href={"/"} className={cl.logo}>Step_65</Link>
+      <Link href={"/"} className={cl.logo}>{logo}</Link>
       <div className={cl.links} >
         <DarkModeToggle/>
         {links.map((el) => (
