@@ -1,10 +1,11 @@
-'use client'
+"use client";
 
 import Link from "next/link";
-import cl from './Navbar.module.css'
+import cl from "./Navbar.module.css";
 import DarkModeToggle from "../DarkModeToggle/DarkModeToggle";
 import { useContext } from "react";
 import { ThemeContext } from "@/context/ThemeContext";
+import { signOut, useSession } from "next-auth/react";
 
 const links = [
   {
@@ -37,26 +38,31 @@ const links = [
     title: "Dashboard",
     url: "/dashboard",
   },
-]
+];
 
 const Navbar = () => {
-const logo = 'Step_65'
+  const session = useSession();
+  const logo = "Step_65";
   return (
-    <nav className={cl.navbar} >
-      <Link href={"/"} className={cl.logo}>{logo}</Link>
-      <div className={cl.links} >
-        <DarkModeToggle/>
+    <nav className={cl.navbar}>
+      <Link href={"/"} className={cl.logo}>
+        {logo}
+      </Link>
+      <div className={cl.links}>
+        <DarkModeToggle />
         {links.map((el) => (
           <Link key={el.id} href={el.url}>
             {el.title}
           </Link>
         ))}
-        <button 
-        className={cl.logout}
-        onClick={()=>{console.log('logged out')}}
-        >
-        Logout
-        </button>
+        {session.status == "authenticated" && (
+          <button
+            className={cl.logout}
+            onClick={signOut} 
+          >
+            Logout
+          </button>
+        )}
       </div>
     </nav>
   );

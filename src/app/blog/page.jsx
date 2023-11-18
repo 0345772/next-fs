@@ -2,6 +2,12 @@ import Link from "next/link";
 import cl from "./page.module.css";
 import Image from "next/image";
 
+export const metadata = {
+  title: "BLOG",
+  description: "The page Blog",
+};
+
+
 async function getData() {
   const res = await fetch("http://localhost:3000/api/posts", {
     cache: "no-store",

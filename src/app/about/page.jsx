@@ -2,6 +2,12 @@ import Image from 'next/image';
 import cl from './page.module.css'
 import Button from '@/components/Button/Button'
 
+export const metadata = {
+  title: "ABOUT",
+  description: "The page About",
+};
+
+
 const About = () => {
 
   return (
